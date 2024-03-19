@@ -12,7 +12,8 @@ public class SortDAO {
     private String user = "root";
     private String password = "password";
 
-    public ArrayList<HashMap<String,String>> select(String sort_type, String asc_or_desc) throws SQLException, ClassNotFoundException {
+    public ArrayList<HashMap<String,String>> select(Integer user_id, String sort_type, String asc_or_desc) 
+    		throws SQLException, ClassNotFoundException {
         ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -20,8 +21,9 @@ public class SortDAO {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            
             connection = DriverManager.getConnection(url, user, password);
-            String sql = "SELECT * FROM todo_list ORDER BY " + sort_type + " " + asc_or_desc + " WHERE status != 'Delete' ";
+            String sql = "SELECT * FROM todo_list where user_id =" + user_id + " ORDER BY " + sort_type + " " + asc_or_desc + " ";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
 
