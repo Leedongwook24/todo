@@ -144,3 +144,9 @@ text-decoration-line:none;
 color:white;
 
 }
+
+.error_msg{
+	color:red;
+	font-weight: bolder;
+	font-size:30px;
+}
