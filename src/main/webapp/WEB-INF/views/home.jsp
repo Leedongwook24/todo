@@ -8,14 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/TodoApp/styles/style.css">
  
-<title>Todo App - TOP -</title>
+<title>Todo App - TOP -  </title>
 </head>
 <body>
 	<div class="total_box">
 	<header>Todo List</header>
 	<main>
 		<div class="content_box">
-		- List
+		
+		- <%= session.getAttribute("name") %>'s ToDo List
 			<div class="list_box">
 				<table>
 						<th class="column_name_box" id="1">Id </th>
@@ -49,7 +50,7 @@
 					<div class="btn_1"> <a href='tocreate'>  Create  </a> </div>
 					<div class="btn_2"> <a href='todelete'>  Delete/Edit  </a> </div>
 					<div class="btn_1"> <a href='tosort'>  Sort </a> </div>
-					
+					<div class="btn_2"> <a href='logout'>  Logout </a> </div>					
 			</div>
 		</div>
 	
