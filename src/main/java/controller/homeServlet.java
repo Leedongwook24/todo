@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ListDAO;
 import dao.SortDAO;
@@ -37,13 +38,19 @@ public class homeServlet extends HttpServlet {
 	            request.setAttribute("message", ""); 
 	        }
 	       try {
+
+	    	   
+	    	   HttpSession session = request.getSession();
+	    	   int id = (Integer)session.getAttribute("id");	    	   
 	    	   ListDAO dao = new ListDAO();
-	    	   request.setAttribute("rows", dao.select());
+	    	   request.setAttribute("rows", dao.select(id));
 	       } catch (SQLException e) {
 	    	   e.printStackTrace();
 	       } catch (Exception e) {
 	    	   request.setAttribute("message","例外発生");
 	       }
+
+	   
  	   String view ="WEB-INF/views/home.jsp";
  	   RequestDispatcher dispatcher= request.getRequestDispatcher(view);
  	   dispatcher.forward(request,response);
@@ -59,8 +66,10 @@ public class homeServlet extends HttpServlet {
 			String sort_type=request.getParameter("sort_type");
 			String asc_or_desc=request.getParameter("asc_or_desc");
 		       try {
+		    	   HttpSession session = request.getSession();
+		    	   int id =(Integer)session.getAttribute("id");
 		    	   SortDAO dao = new SortDAO();
-		    	   request.setAttribute("rows", dao.select(sort_type, asc_or_desc));
+		    	   request.setAttribute("rows", dao.select(id, sort_type, asc_or_desc));
 		       } catch (SQLException e) {
 		    	   e.printStackTrace();
 		       } catch (Exception e) {

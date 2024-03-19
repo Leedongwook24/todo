@@ -18,10 +18,10 @@ public class ListDAO {
     	conection = DriverManager.getConnection(url,user,password);
     }
 	
-    public ArrayList<HashMap<String,String>> select() throws Exception {
+    public ArrayList<HashMap<String,String>> select(Integer user_id) throws Exception {
     	PreparedStatement statement = null;
     	ResultSet rs = null;
-    	String sql="SELECT * FROM todo_list WHERE status != 'Delete'";
+    	String sql="SELECT * FROM todo_list WHERE status != 'Delete' AND user_id ="+ user_id +" ";
     	ArrayList<HashMap<String, String>> rows= new 
     	ArrayList<HashMap<String, String>>();
     	conect();
