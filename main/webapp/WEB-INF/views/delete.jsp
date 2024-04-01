@@ -16,8 +16,7 @@
 		
 		<div class="content_box">
 		- Delete
-		<form action="edit_or_delete" method="post">
-		<input type="hidden" name="delete_trigger" value="true">
+		<form action="delete" method="post">
 		<div class="input_box">
 		<label for="id">id:</label> <input type="text" name="id" value='1' class="input_id_box"> <br>
 		<div class="btn_box1">
@@ -30,7 +29,7 @@
 
 		<div class="content_box">
 		-Edit		
-		<form action="edit_or_delete" method="post">
+		<form action="edit" method="post">
 		<div class="input_box">
 		<label for="id">id:</label> <input type="text" name="id" value='1' class="input_id_box"> 
 		<label for="user_id"> user_id:</label> <input type="text" name="user_id" value='1' class="input_id_box"> <br>

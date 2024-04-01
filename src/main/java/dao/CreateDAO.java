@@ -5,50 +5,63 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
 
 public class CreateDAO {
-	String url = "jdbc:mysql://localhost:3306/todo_kadai";
-    String user = "root";
-    String password ="password";
-    Connection conection =null;
-    
-    public void conect() throws Exception{
-    	Class.forName("com.mysql.cj.jdbc.Driver");
-    	conection = DriverManager.getConnection(url,user,password);
-    }
-	
-    public ArrayList<HashMap<String,String>> select() throws Exception {
-    	PreparedStatement statement = null;
-    	ResultSet rs = null;
-    	String sql="SELECT * FROM todo_list";
-    	ArrayList<HashMap<String, String>> rows= new 
-    	ArrayList<HashMap<String, String>>();
-    	conect();
-    	statement=conection.prepareStatement(sql);
-    	rs=statement.executeQuery();
-    	while(rs.next()) {
-    		HashMap<String, String> columns = new HashMap<String,String>();
-    		String id = rs.getString("id");
-    		columns.put("id", id);
-    		String title= rs.getString("title");
-    		columns.put("title", title);
-    		String content=rs.getString("content");
-    		columns.put("content", content);
-    		LocalDateTime currenttime=LocalDateTime.now();
-    		String create_date=currenttime.toString();
-    		columns.put("create_date",create_date);
-    		rows.add(columns);
-    	}
-    	return rows;
-    }
-	
-	
-	
-	
-	
-	
-	
-	
+	Connection conection = null;
+	PreparedStatement statement = null;
+	ResultSet rs = null;
+
+	public boolean conect() throws Exception {
+		String url = "jdbc:mysql://localhost:3306/todo_kadai";
+		String user = "root";
+		String password = "password";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conection = DriverManager.getConnection(url, user, password);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public void Insert(Integer user_id, String title, String content) throws Exception {
+		try {
+			conect();
+			String sql = "INSERT INTO todo_list (user_id, title, content, create_date, status, Priority) VALUES (?, ?, ?, ?, ?, ?)";
+			statement = conection.prepareStatement(sql);
+			statement.setInt(1, user_id);
+			statement.setString(2, title);
+			statement.setString(3, content);
+			LocalDateTime currentDateTime = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String create_date = currentDateTime.format(formatter);
+			statement.setString(4, create_date);
+			String inprogress = "In_Progress";
+			statement.setString(5, inprogress);
+			statement.setInt(6, 2);
+			statement.executeUpdate();
+		} finally {
+			closeResources();
+		}
+
+	}
+
+	private void closeResources() {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+			if (conection != null) {
+				conection.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

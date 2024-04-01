@@ -49,15 +49,11 @@
 
 				- Modify
 				<div class="btn_box">
-					<div>
-						<form method="GET" action="create">
-							<input class="btn_1" type="submit" value="Create">
-						</form>
+					<div class="btn_1">
+						<a href='create'> Create </a>
 					</div>
-					<div>
-						<form method="GET" action="edit_or_delete">
-							<input class="btn_2" type="submit" value="Delete/Edit">
-						</form>
+					<div class="btn_2">
+						<a href='todelete'> Delete/Edit </a>
 					</div>
 					<div class="btn_1">
 						<a href='tosort'> Sort </a>

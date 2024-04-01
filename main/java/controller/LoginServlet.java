@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 				throw new ServletException("Database Connection Failed", e);
 			} 
 // 암호화 알고리즘을 사용한 경우
-/*			catch (NoSuchAlgorithmException e) {
+			/*catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 				throw new ServletException("Generate hash Failed", e);
 			}*/

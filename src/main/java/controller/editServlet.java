@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class editServlet
  */
-@WebServlet("/edit")
+@WebServlet("/edit123")
 public class editServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
